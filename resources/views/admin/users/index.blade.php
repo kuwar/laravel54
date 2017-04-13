@@ -1,5 +1,7 @@
 @extends('admin.layouts.admin')
 
+@section('title', $title)
+
 @section('styles')
     <link href="{{URL::to('admin/coco/assets/libs/jquery-datatables/css/dataTables.bootstrap.css')}}" rel="stylesheet"
           type="text/css"/>
@@ -16,15 +18,16 @@
         <div class="content">
             <!-- Page Heading Start -->
             <div class="page-heading">
-                <h1><i class='fa fa-table'></i> Datatables</h1>
-                <h3>Basic & Simple Sortable Tables</h3></div>
-            <!-- Page Heading End-->                <!-- Your awesome content goes here -->
+                <h1><i class='fa fa-users'></i> {{$title}}</h1>
+                <h3>{{$subtitle}}</h3></div>
+            <!-- Page Heading End-->
+            <!-- Your awesome content goes here -->
             <div class="row">
 
                 <div class="col-md-12">
                     <div class="widget">
                         <div class="widget-header">
-                            <h2><strong>Default</strong> DataTable</h2>
+                            <h2><strong>{{$title}}</strong> {{$subtitle}}</h2>
                             <div class="additional-btn">
                                 <a href="#" class="hidden reload"><i class="icon-ccw-1"></i></a>
                                 <a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>

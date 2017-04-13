@@ -12,13 +12,18 @@
 */
 
 Route::get('/', function () {
-    return view('admin.dashboard.index');
+    return redirect('/login');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+
+Route::get('/home', function () {
+    return redirect('/admin/dashboard');
+});
 
 Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
+    Route::get('dashboard', 'DashboardController@index');
+
     Route::resource('users', 'UsersController');
 });

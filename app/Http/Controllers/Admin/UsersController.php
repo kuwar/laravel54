@@ -31,10 +31,11 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
-        $users = User::all();
+        $data['title'] = "Users";
+        $data['subtitle'] = "List of users";
+        $data['users'] = User::all();
 
-        return view('admin.users.index', ['users' => $users]);
+        return view('admin.users.index', $data);
     }
 
     /**
@@ -44,8 +45,10 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
-        return view('admin.users.create');
+        $data['title'] = "Users";
+        $data['subtitle'] = "Create a user";
+
+        return view('admin.users.create', $data);
     }
 
     /**
@@ -67,8 +70,10 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
-        return view('admin.users.view');
+        $data['title'] = "Users";
+        $data['subtitle'] = "Show a user detail";
+        $data['user'] = User::where('id', $id)->first();
+        return view('admin.users.view', $data);
     }
 
     /**
@@ -79,8 +84,10 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
-        return view('admin.users.edit');
+        $data['title'] = "Users";
+        $data['subtitle'] = "Edit a user";
+
+        return view('admin.users.edit', $data);
     }
 
     /**

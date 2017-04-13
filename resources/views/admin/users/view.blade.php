@@ -1,67 +1,95 @@
-@extends('layouts.admin')
+@extends('admin.layouts.admin')
 
-@section('title', 'Students')
+@section('title', $title)
 
-<!--Page specific css-->
-@section('page_css')
-    <link href="{{URL::to('/bower_components/responsive-tables/responsive-tables.css')}}" rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
-
-    <style>
-        form label.error {
-            color: red;
-        }
-    </style>
-
+@section('styles')
+    <link href="{{URL::to('admin/coco/assets/libs/bootstrap-validator/css/bootstrapValidator.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{URL::to('admin/coco/assets/css/style.css')}}" rel="stylesheet" type="text/css" />
 @endsection
-<!--/-->
+
 @section('contents')
-
-    {{--User Details--}}
-    <div class="row">
-        <div class="box col-md-12">
-            <div class="box-inner">
-                <div class="box-header well" data-original-title="">
-                    <h2><i class="glyphicon glyphicon-user"></i> Coach Details</h2>
-
-                </div>
-                <div class="box-content">
-                    <div class="box-content">
-                        <ul class="dashboard-list">
-                            <li>
-                                <a href="#">
-                                    <img class="dashboard-avatar" alt="{{$user->name}}"
-                                         src="{{$user->image}}"></a>
-                                <strong>Name:</strong>{{$user->name}}<br>
-                                <strong>Email:</strong>{{$user->email}}<br>
-                                <strong>Gender:</strong>{{$user->gender}}<br>
-                                <strong>Phone:</strong>{{$user->phone_no}}<br>
-                                <strong>Date of Birth:</strong> {{date("Y-m-d", strtotime($user->date_of_birth))}}<br>
-                                <br>
-                                <strong>Status:</strong> @if($user->status == 'active')<span
-                                        class="label-success label label-default">Approved</span>@else <span
-                                        class="label-warning label label-default">Pending</span>@endif
-                            </li>
-
-                        </ul>
+    <div class="content-page">
+        <!-- ============================================================== -->
+        <!-- Start Content here -->
+        <!-- ============================================================== -->
+        <div class="content">
+            <!-- Page Heading Start -->
+            <div class="page-heading">
+                <h1>{{$subtitle}}</h1>
+            </div>
+            <!-- Page Heading End-->
+            <div class="row">
+                <div class="col-sm-6 portlets">
+                    <div class="widget">
+                        <div class="widget-header transparent">
+                            <h2><strong>Edit</strong> Form</h2>
+                            <div class="additional-btn">
+                                <a href="#" class="hidden reload"><i class="icon-ccw-1"></i></a>
+                                <a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
+                                <a href="#" class="widget-close"><i class="icon-cancel-3"></i></a>
+                            </div>
+                        </div>
+                        <div class="widget-content padding">
+                            <form role="form" id="registerForm">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input type="text" class="form-control" name="username">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email address</label>
+                                    <input type="text" class="form-control" name="email">
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label>Password</label>
+                                            <input id="password" type="password" class="form-control" name="password">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label>Re-Password</label>
+                                            <input type="password" class="form-control" name="confirmPassword">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone</label>
+                                    <input type="text" class="form-control" name="phoneNumber">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" id="captchaOperation"></label>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" name="captcha"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input name="acceptTerms" type="checkbox"> I agree to the <a href="#">Terms
+                                                of Service</a>
+                                        </label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Footer Start -->
+        @include('admin.includes.footer')
+        <!-- Footer End -->
         </div>
-        <!--/span-->
+        <!-- ============================================================== -->
+        <!-- End content here -->
+        <!-- ============================================================== -->
+
     </div>
-
 @endsection
 
-@section('modal')
-
-@endsection
-
-<!--Loading page specific css-->
-@section('page_js')
-
-@endsection
-<!--/-->
-
-@section('custom_js')
+@section('scripts')
+    <script src="{{URL::to('admin/coco/assets/libs/bootstrap-validator/js/bootstrapValidator.min.js')}}"></script>
+    <script src="{{URL::to('admin/coco/assets/js/pages/form-validation.js')}}"></script>
 @endsection

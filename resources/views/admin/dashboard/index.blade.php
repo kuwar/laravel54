@@ -1,5 +1,7 @@
 @extends('admin.layouts.admin')
 
+@section('title', $title)
+
 @section('styles')
     <link href="{{URL::to('admin/coco/assets/libs/rickshaw/rickshaw.min.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{URL::to('admin/coco/assets/libs/morrischart/morris.css')}}" rel="stylesheet" type="text/css"/>
