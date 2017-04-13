@@ -21,11 +21,13 @@
         <!--- Divider -->
         <div id="sidebar-menu">
             <ul>
-                <li class='has_sub'><a href='javascript:void(0);'><i class='icon-home-3'></i><span>Dashboard</span>
+                <li class=''><a href="{{url('admin/dashboard')}}"><i class='icon-home-3'></i><span>Dashboard</span></a></li>
+                {{--Users--}}
+                <li class='has_sub'><a href='javascript:void(0);'><i class='icon-user-3'></i><span>Users</span>
                         <span class="pull-right"><i class="fa fa-angle-down"></i></span></a>
                     <ul>
-                        <li><a href='index.html' class='active'><span>Dashboard v1</span></a></li>
-                        <li><a href='index2.html'><span>Dashboard v2</span></a></li>
+                        <li><a href="{{url('admin/users')}}" class='active'><span>List users</span></a></li>
+                        <li><a href={{url('admin/users/create')}}><span>Create user</span></a></li>
                     </ul>
                 </li>
                 <li class='has_sub'><a href='javascript:void(0);'><i
