@@ -2,25 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\User;
-use Illuminate\Http\Request;
+use App\Contracts\UserInterface;
+use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Lang;
 
 class UsersController extends Controller
 {
     public $viewData = [];
+    public $user;
 
-    public function __construct()
+    public function __construct(UserInterface $user)
     {
+        $this->user = $user;
+
         $this->viewData = [
             'title' => "",
-            'subtitle' => "",
-            'create' => Lang::get('view.CREATE'),
-            'list' => Lang::get('view.LIST'),
-            'edit' => Lang::get('view.EDIT'),
-            'show' => Lang::get('view.SHOW'),
-            'delete' => Lang::get('view.DELETE'),
+            'subtitle' => ""
         ];
     }
 
@@ -31,11 +29,13 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $data['title'] = "Users";
-        $data['subtitle'] = "List of users";
-        $data['users'] = User::all();
+        $this->viewData = [
+            'title' => "Users",
+            'subtitle' => "List of users",
+            'users' => $this->user->getAll()
+        ];
 
-        return view('admin.users.index', $data);
+        return view('admin.users.index', $this->viewData);
     }
 
     /**
@@ -45,71 +45,97 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $data['title'] = "Users";
-        $data['subtitle'] = "Create a user";
+        $this->viewData = [
+            'title' => "Users",
+            'subtitle' => "Create a user"
+        ];
 
-        return view('admin.users.create', $data);
+        return view('admin.users.create', $this->viewData);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        if ($this->user->add()) {
+            Session::flash('success', \Lang::get('message.CREATE', 'user'));
+        } else {
+            Session::flash('error', \Lang::get('message.ERROR'));
+        }
+        return redirect('admin/users');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $data['title'] = "Users";
-        $data['subtitle'] = "Show a user detail";
-        $data['user'] = User::where('id', $id)->first();
-        return view('admin.users.view', $data);
+        $this->viewData = [
+            'title' => "Users",
+            'subtitle' => "Show a user detail",
+            'user' => $this->user->getById($id)
+        ];
+
+        return view('admin.users.view', $this->viewData);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $data['title'] = "Users";
-        $data['subtitle'] = "Edit a user";
+        $this->viewData = [
+            'title' => "Users",
+            'subtitle' => "Edit a user"
+        ];
 
-        return view('admin.users.edit', $data);
+        return view('admin.users.edit', $this->viewData);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        //
+        $editUser = $this->user->edit($id);
+
+        if ($editUser !== false) {
+            Session::flash('success', Lang::get('message.UPDATE', 'user'));
+        } else {
+            Session::flash('warning', \Lang::get('message.ERROR'));
+        }
+        return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $delete = $this->user->remove($id);
+
+        if ($delete !== false) {
+            Session::flash('success', Lang::get('message.DELETE'));
+        } else {
+            Session::flash('error', \Lang::get('message.ERROR'));
+        }
+        return redirect()->back();
     }
 }

@@ -1,60 +1,66 @@
 <?php
 namespace App\Repositories;
 
-use App\Mail\PasswordReset;
-use App\Mail\Welcome;
-use App\Models\Attendence;
-use App\Models\Contact;
-use App\Models\MakeupClass;
+use App\Contracts\UserInterface;
+use App\Libraries\GeneralLibrary;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Mail;
 
 use App\User;
-use App\models\Role;
 
-class UserRepository
+class UserRepository implements UserInterface
 {
 
+    protected $user;
     protected $request;
+    protected $generalLibrary;
 
-    /**
-     * Defining constructor
-     */
-    public function __construct(Request $request)
+    public function __construct(Request $request, User $user, GeneralLibrary $generalLibrary)
     {
+        $this->user = $user;
         $this->request = $request;
+        $this->generalLibrary = $generalLibrary;
     }
 
-    public function getUsers()
+    public function getAll()
     {
         try {
-            $users = User::all();
+            $allUsers = $this->user->all();
         } catch (ModelNotFoundException $ex) {
-            $users = [];
+            $allUsers = [];
         }
-        return $users;
+        return $allUsers;
     }
 
-    public function getUser($id)
+    public function getById($id)
     {
         try {
-            $user = User::findOrFail($id);
+            $userById = $this->user->findOrFail($id);
         } catch (ModelNotFoundException $ex) {
-            $user = [];
+            $userById = [];
         }
-        return $user;
+        return $userById;
     }
 
-    public function insertUser()
+    public function getByAttribute($attribute, $value)
+    {
+        try {
+            $userByAttribute = $this->user->where($attribute, $value)->get();
+        } catch (ModelNotFoundException $ex) {
+            $userByAttribute = [];
+        }
+        return $userByAttribute;
+    }
+
+    public function add()
     {
         try {
             $input = $this->request->all();
 
-            $user = User::create([
+            $userInserted = $this->user->create([
                 'name' => $input['name'],
                 'username' => $input['username'],
                 'email' => $input['email'],
@@ -62,7 +68,6 @@ class UserRepository
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);
-
 
             // Mail::to($user)->send(new Welcome($input['password'], $user));
 
@@ -73,11 +78,11 @@ class UserRepository
         return $userId;
     }
 
-    public function updateUser($id)
+    public function edit($id)
     {
         try {
             $input = $this->request->all();
-            User::where('id', $id)
+            $this->user->where('id', $id)
                 ->update([
                     'name' => $input['name'],
                     'username' => $input['username'],
@@ -92,12 +97,12 @@ class UserRepository
         return $success;
     }
 
-    public function deleteUser($id)
+    public function remove($id)
     {
         try {
-            $user = User::findOrFail($id);
+            $userToDelete = $this->user->findOrFail($id);
+            $userToDelete->delete();
 
-            $user->delete();
             $success = true;
         } catch (ModelNotFoundException $e) {
             $success = false;
@@ -158,13 +163,12 @@ class UserRepository
 
     public function randomUniqueString()
     {
-        $apiToken = str_random(60);
+        $apiToken = $this->generalLibrary->randomString();
 
         $user = User::where('api_token', $apiToken)->first();
         if ($user) {
             $this->randomUniqueString();
         }
-
         return $apiToken;
     }
 
