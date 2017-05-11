@@ -60,7 +60,7 @@ class UserRepository implements UserInterface
         try {
             $input = $this->request->all();
 
-            $userInserted = $this->user->create([
+            $this->user->create([
                 'name' => $input['name'],
                 'username' => $input['username'],
                 'email' => $input['email'],
