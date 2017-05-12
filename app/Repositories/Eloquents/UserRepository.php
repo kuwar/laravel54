@@ -1,7 +1,6 @@
 <?php
 namespace App\Repositories;
 
-use App\Contracts\UserInterface;
 use App\Libraries\GeneralLibrary;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -11,7 +10,7 @@ use Illuminate\Support\Facades\Mail;
 
 use App\User;
 
-class UserRepository implements UserInterface
+class UserRepository extends AbstractRepository
 {
 
     protected $user;
@@ -25,34 +24,14 @@ class UserRepository implements UserInterface
         $this->generalLibrary = $generalLibrary;
     }
 
-    public function getAll()
+    /**
+     * Specify Model class name
+     *
+     * @return mixed
+     */
+    function model()
     {
-        try {
-            $allUsers = $this->user->all();
-        } catch (ModelNotFoundException $ex) {
-            $allUsers = [];
-        }
-        return $allUsers;
-    }
-
-    public function getById($id)
-    {
-        try {
-            $userById = $this->user->findOrFail($id);
-        } catch (ModelNotFoundException $ex) {
-            $userById = [];
-        }
-        return $userById;
-    }
-
-    public function getByAttribute($attribute, $value)
-    {
-        try {
-            $userByAttribute = $this->user->where($attribute, $value)->get();
-        } catch (ModelNotFoundException $ex) {
-            $userByAttribute = [];
-        }
-        return $userByAttribute;
+        return 'App\User';
     }
 
     public function add()

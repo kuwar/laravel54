@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Contracts\UserInterface;
 use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
+use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Lang;
 
 class UsersController extends Controller
@@ -12,7 +12,7 @@ class UsersController extends Controller
     public $viewData = [];
     public $user;
 
-    public function __construct(UserInterface $user)
+    public function __construct(UserRepository $user)
     {
         $this->user = $user;
 
@@ -32,7 +32,7 @@ class UsersController extends Controller
         $this->viewData = [
             'title' => "Users",
             'subtitle' => "List of users",
-            'users' => $this->user->getAll()
+            'users' => $this->user->all()
         ];
 
         return view('admin.users.index', $this->viewData);
