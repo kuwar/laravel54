@@ -2440,7 +2440,7 @@ button.navbar-toggle {
   font-size: 12px;
 }
 .page-heading {
-  margin: 0px 0 20px;
+  /*margin: 0px 0 20px;*/
   padding: 5px 0;
 }
 .page-heading h1 {
