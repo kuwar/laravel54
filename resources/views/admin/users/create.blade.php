@@ -3,8 +3,9 @@
 @section('title', $title)
 
 @section('styles')
-    <link href="{{URL::to('admin/coco/assets/libs/bootstrap-validator/css/bootstrapValidator.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{URL::to('admin/coco/assets/css/style.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{URL::to('admin/coco/assets/libs/bootstrap-validator/css/bootstrapValidator.min.css')}}"
+          rel="stylesheet" type="text/css"/>
+    <link href="{{URL::to('admin/coco/assets/css/style.css')}}" rel="stylesheet" type="text/css"/>
 @endsection
 
 @section('contents')
@@ -30,47 +31,42 @@
                             </div>
                         </div>
                         <div class="widget-content padding">
-                            <form role="form" id="registerForm">
-                                <div class="form-group">
+                            <form role="form" id="registerForm" method="post" action="{{ url('admin/users') }}">
+                                {{ csrf_field() }}
+
+                                <div class="form-group {{ $errors->has('name') ? ' has-error ' : ''}}">
                                     <label>Username</label>
-                                    <input type="text" class="form-control" name="username">
+                                    <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                                    @if ($errors->has('name'))
+                                        <small class="help-block">{{ $errors->first('name') }}</small>
+                                    @endif
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                                     <label>Email address</label>
-                                    <input type="text" class="form-control" name="email">
+                                    <input type="text" class="form-control" name="email" value="{{ old('email') }}">
+                                    @if ($errors->has('email'))
+                                        <small class="help-block">{{ $errors->first('email') }}</small>
+                                    @endif
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6 {{ $errors->has('password') ? 'has-error' : '' }}">
                                             <label>Password</label>
                                             <input id="password" type="password" class="form-control" name="password">
+                                            @if ($errors->has('password'))
+                                                <small class="help-block">{{ $errors->first('password') }}</small>
+                                            @endif
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6 {{ $errors->has('password_confirmation') ? 'has-error' : '' }}">
                                             <label>Re-Password</label>
-                                            <input type="password" class="form-control" name="confirmPassword">
+                                            <input type="password" class="form-control" name="password_confirmation">
+                                            @if ($errors->has('password_confirmation'))
+                                                <small class="help-block">{{ $errors->first('password_confirmation') }}</small>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>Phone</label>
-                                    <input type="text" class="form-control" name="phoneNumber">
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label" id="captchaOperation"></label>
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="captcha"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input name="acceptTerms" type="checkbox"> I agree to the <a href="#">Terms
-                                                of Service</a>
-                                        </label>
-                                    </div>
-                                </div>
+
                                 <button type="submit" class="btn btn-primary">Register</button>
                             </form>
                         </div>

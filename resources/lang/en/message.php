@@ -12,7 +12,7 @@ return [
 
     // Generic notification message
     'ERROR' => "Sorry! error occured.",
-    'CREATE' => "You have successfullly created :name.",
+    'CREATE' => "You have successfully created :name.",
     'UPDATE' => "You have successfully updated :name.",
     'DELETE' => "You have successfully deleted :name.",
 

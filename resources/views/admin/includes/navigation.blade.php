@@ -10,7 +10,8 @@
             <div class="col-xs-8">
                 <div class="profile-text">Welcome <b>{{ Auth::user()->name }}</b></div>
                 <div class="profile-buttons">
-                    <a class="md-trigger" data-modal="logout-modal" title="Sign Out"><i class="fa fa-power-off text-red-1"></i></a>
+                    <a class="md-trigger" data-modal="logout-modal" title="Sign Out"><i
+                                class="fa fa-power-off text-red-1"></i></a>
                 </div>
             </div>
         </div>
@@ -21,13 +22,19 @@
         <!--- Divider -->
         <div id="sidebar-menu">
             <ul>
-                <li class=''><a href="{{url('admin/dashboard')}}"><i class='icon-home-3'></i><span>Dashboard</span></a></li>
+                <li class=''><a href="{{url('admin/dashboard')}}"
+                                class="{{ Request::segment(2) == 'dashboard' ? 'active' : '' }}"><i
+                                class='icon-home-3'></i><span>Dashboard </span></a></li>
                 {{--Users--}}
                 <li class='has_sub'><a href='javascript:void(0);'><i class='icon-user-3'></i><span>Users</span>
                         <span class="pull-right"><i class="fa fa-angle-down"></i></span></a>
                     <ul>
-                        <li><a href="{{url('admin/users')}}" class='active'><span>List users</span></a></li>
-                        <li><a href={{url('admin/users/create')}}><span>Create user</span></a></li>
+                        <li><a href="{{url('admin/users')}}"
+                               class="{{ (Request::segment(2) == 'users' && Request::segment(3) == '') ? 'active' : '' }}"><span>List users</span></a>
+                        </li>
+                        <li>
+                            <a href={{url('admin/users/create')}} class="{{ (Request::segment(2) == 'users' && Request::segment(3) == 'create') ? 'active' : '' }}"><span>Create user</span></a>
+                        </li>
                     </ul>
                 </li>
                 <li class='has_sub'><a href='javascript:void(0);'><i

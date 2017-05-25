@@ -21,6 +21,10 @@
                 <h1><i class='fa fa-users'></i> {{$title}}</h1>
                 <h3>{{$subtitle}}</h3></div>
             <!-- Page Heading End-->
+
+            {{--Alert--}}
+            @include('admin.includes.alerts')
+            
             <!-- Your awesome content goes here -->
             <div class="row">
 

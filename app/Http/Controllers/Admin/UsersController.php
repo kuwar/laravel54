@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
 use App\Repositories\Eloquents\UserRepository;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Session;
 
 class UsersController extends Controller
 {
@@ -61,10 +64,18 @@ class UsersController extends Controller
      */
     public function store(UserRequest $request)
     {
-        if ($this->user->add()) {
-            Session::flash('success', \Lang::get('message.CREATE', 'user'));
+        $inputs = $request->all();
+        $newUserData = [
+            'name' => $inputs['name'],
+            'email' => $inputs['email'],
+            'password' => Hash::make($inputs['password']),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ];
+        if ($this->user->create($newUserData)) {
+            Session::flash('success', Lang::get('message.CREATE', ['name' => 'user']));
         } else {
-            Session::flash('error', \Lang::get('message.ERROR'));
+            Session::flash('error', Lang::get('message.ERROR'));
         }
         return redirect('admin/users');
     }
@@ -114,9 +125,9 @@ class UsersController extends Controller
         $editUser = $this->user->edit($id);
 
         if ($editUser !== false) {
-            Session::flash('success', Lang::get('message.UPDATE', 'user'));
+            Session::flash('success', Lang::get('message.UPDATE', ['name' => 'user']));
         } else {
-            Session::flash('warning', \Lang::get('message.ERROR'));
+            Session::flash('warning', Lang::get('message.ERROR'));
         }
         return redirect()->back();
     }
@@ -132,9 +143,9 @@ class UsersController extends Controller
         $delete = $this->user->remove($id);
 
         if ($delete !== false) {
-            Session::flash('success', Lang::get('message.DELETE'));
+            Session::flash('success', Lang::get('message.DELETE', ['name' => 'user']));
         } else {
-            Session::flash('error', \Lang::get('message.ERROR'));
+            Session::flash('error', Lang::get('message.ERROR'));
         }
         return redirect()->back();
     }

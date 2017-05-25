@@ -93,7 +93,7 @@ class UserRepository extends AbstractRepository
 
     public function test()
     {
-        return "Testing additional method calls";
+        dd($this->all());
     }
 
     /*

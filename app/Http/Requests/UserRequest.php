@@ -32,7 +32,7 @@ class UserRequest extends FormRequest
             case 'POST': {
                 return [
                     'name' => 'required|max:255',
-                    'email' => 'required|unique:users|max:255',
+                    'email' => 'required|email|unique:users|max:255',
                     'password' => 'required|confirmed|min:6'
                 ];
             }
@@ -40,7 +40,7 @@ class UserRequest extends FormRequest
             case 'PATCH': {
                 return [
                     'name' => 'required|max:255',
-                    'email' => 'required|unique:users,email,' . Request::get('id')
+                    'email' => 'required|email|unique:users,email,' . Request::get('id')
                 ];
             }
             default:
