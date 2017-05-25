@@ -72,13 +72,13 @@
                                                     <a class="btn btn-success"
                                                        href="{{route('users.show', $user->id)}}">
                                                         <i class="glyphicon glyphicon-eye-open icon-white"></i>
-                                                        {{trans('label.view')}}
+                                                        {{trans('view.SHOW')}}
                                                     </a>
 
                                                     <a class="btn btn-info"
                                                        href="{{URL::to('admin/users/'.$user->id.'/edit')}}">
                                                         <i class="glyphicon glyphicon-edit icon-white"></i>
-                                                        {{trans('label.edit')}}
+                                                        {{trans('view.EDIT')}}
                                                     </a>
 
                                                     {!! Form::open([
@@ -90,7 +90,7 @@
                                                         !!}
                                                     <button type="submit" class="btn btn-danger" href="#">
                                                         <i class="glyphicon glyphicon-trash icon-white"></i>
-                                                        {{trans('label.delete')}}
+                                                        {{trans('view.DELETE')}}
                                                     </button>
                                                     {!! Form::close() !!}
                                                 </td>
