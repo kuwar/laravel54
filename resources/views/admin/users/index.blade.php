@@ -22,10 +22,10 @@
                 <h3>{{$subtitle}}</h3></div>
             <!-- Page Heading End-->
 
-            {{--Alert--}}
-            @include('admin.includes.alerts')
+        {{--Alert--}}
+        @include('admin.includes.alerts')
 
-            <!-- Your awesome content goes here -->
+        <!-- Your awesome content goes here -->
             <div class="row">
 
                 <div class="col-md-12">
@@ -47,50 +47,55 @@
                                         <thead>
                                         <tr>
                                             <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>Email</th>
+                                            <th>Created At</th>
+                                            <th>Action</th>
                                         </tr>
                                         </thead>
 
                                         <tfoot>
                                         <tr>
                                             <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>Email</th>
+                                            <th>Created At</th>
+                                            <th>Action</th>
                                         </tr>
                                         </tfoot>
 
                                         <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ashton Cox</td>
-                                            <td>Junior Technical Author</td>
-                                            <td>San Francisco</td>
-                                            <td>66</td>
-                                            <td>2009/01/12</td>
-                                            <td>$86,000</td>
-                                        </tr>
+                                        @foreach($users as $user)
+                                            <tr>
+                                                <td>{{ $user->name }}</td>
+                                                <td>{{ $user->email }}</td>
+                                                <td>{{ $user->created_at }}</td>
+                                                <td>
+                                                    <a class="btn btn-success"
+                                                       href="{{route('users.show', $user->id)}}">
+                                                        <i class="glyphicon glyphicon-eye-open icon-white"></i>
+                                                        {{trans('label.view')}}
+                                                    </a>
+
+                                                    <a class="btn btn-info"
+                                                       href="{{URL::to('admin/users/'.$user->id.'/edit')}}">
+                                                        <i class="glyphicon glyphicon-edit icon-white"></i>
+                                                        {{trans('label.edit')}}
+                                                    </a>
+
+                                                    {!! Form::open([
+                                                            'method' => 'DELETE',
+                                                            'route' => ['users.destroy', $user->id],
+                                                            'style' => 'display:inline',
+                                                            'onSubmit' => "return confirm('Are you sure to delete student?');"
+                                                            ])
+                                                        !!}
+                                                    <button type="submit" class="btn btn-danger" href="#">
+                                                        <i class="glyphicon glyphicon-trash icon-white"></i>
+                                                        {{trans('label.delete')}}
+                                                    </button>
+                                                    {!! Form::close() !!}
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </form>
