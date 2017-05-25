@@ -24,7 +24,7 @@
 
             {{--Alert--}}
             @include('admin.includes.alerts')
-            
+
             <!-- Your awesome content goes here -->
             <div class="row">
 
