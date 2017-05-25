@@ -85,7 +85,7 @@
                                                             'method' => 'DELETE',
                                                             'route' => ['users.destroy', $user->id],
                                                             'style' => 'display:inline',
-                                                            'onSubmit' => "return confirmDelete('Are you sure to delete student?');"
+                                                            'onSubmit' => "return confirmDelete();"
                                                             ])
                                                         !!}
                                                     <button type="submit" class="btn btn-danger" href="#">
@@ -125,10 +125,7 @@
     {{--Custom scripts--}}
     <script>
         $(document).ready(function () {
-            function confirmDelete(evt) {
-                evt.preventDefault();
-
-                $('#confirmDeleteModal').modal('show');
+            function confirmDelete() {
 
                 return false;
             }
