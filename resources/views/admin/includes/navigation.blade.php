@@ -8,9 +8,9 @@
                             src="{{URL::to('admin/coco/images/users/user-100.jpg')}}"></a>
             </div>
             <div class="col-xs-8">
-                <div class="profile-text">Welcome <b>Jane</b></div>
+                <div class="profile-text">Welcome <b>{{ Auth::user()->name }}</b></div>
                 <div class="profile-buttons">
-                    <a href="javascript:;" title="Sign Out"><i class="fa fa-power-off text-red-1"></i></a>
+                    <a class="md-trigger" data-modal="logout-modal" title="Sign Out"><i class="fa fa-power-off text-red-1"></i></a>
                 </div>
             </div>
         </div>
