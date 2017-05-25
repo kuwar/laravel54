@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
-use App\Repositories\UserRepository;
+use App\Repositories\Eloquents\UserRepository;
 use Illuminate\Support\Facades\Lang;
 
 class UsersController extends Controller

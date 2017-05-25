@@ -2,6 +2,8 @@
 
 namespace App\Libraries;
 
+use Illuminate\Http\Request;
+
 class GeneralLibrary
 {
 

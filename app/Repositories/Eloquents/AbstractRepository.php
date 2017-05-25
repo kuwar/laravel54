@@ -1,4 +1,4 @@
-<?php namespace App\Repositories;
+<?php namespace App\Repositories\Eloquents;
 
 use App\Repositories\Contracts\RepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
@@ -40,7 +40,7 @@ abstract class AbstractRepository implements RepositoryInterface {
      * @return mixed
      */
     public function all($columns = array('*')) {
-        return $this->model->get($columns);
+        return $this->model->get();
     }
 
     /**

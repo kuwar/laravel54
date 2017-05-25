@@ -1,7 +1,8 @@
 <?php
-namespace App\Repositories;
+namespace App\Repositories\Eloquents;
 
 use App\Libraries\GeneralLibrary;
+use Illuminate\Container\Container as App;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
@@ -19,6 +20,7 @@ class UserRepository extends AbstractRepository
 
     public function __construct(Request $request, User $user, GeneralLibrary $generalLibrary)
     {
+        parent::__construct(new App);
         $this->user = $user;
         $this->request = $request;
         $this->generalLibrary = $generalLibrary;
@@ -87,6 +89,11 @@ class UserRepository extends AbstractRepository
             $success = false;
         }
         return $success;
+    }
+
+    public function test()
+    {
+        return "Testing additional method calls";
     }
 
     /*
