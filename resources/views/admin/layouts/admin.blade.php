@@ -77,6 +77,25 @@
         </div>
     </div>
 </div>
+
+{{--Modal to delete--}}
+<!-- Modal fade in scale up -->
+<div class="md-modal md-fade-in-scale-up" id="confirmDeleteModal">
+    <div class="md-content">
+        <h3>Delete</h3>
+        <div>
+            <p>Are you sure to delete data?</p>
+            <ul>
+                <li><strong>Note:</strong> If once deleted it will be removed permanently.</li>
+            </ul>
+            <p>
+                <button class="btn btn-danger md-close">Close me!</button>
+                <button class="btn btn-success md-close">Some button</button>
+            </p>
+        </div>
+    </div>
+</div>
+
 <!-- Modal End -->
 
 <!-- Begin page -->

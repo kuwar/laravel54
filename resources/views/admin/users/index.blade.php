@@ -69,15 +69,15 @@
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->created_at }}</td>
                                                 <td>
-                                                    <a class="btn btn-success"
+                                                    <a class="btn btn-info"
                                                        href="{{route('users.show', $user->id)}}">
-                                                        <i class="glyphicon glyphicon-eye-open icon-white"></i>
+                                                        <i class="glyphicon glyphicon-eye-open"></i>
                                                         {{trans('view.SHOW')}}
                                                     </a>
 
-                                                    <a class="btn btn-info"
+                                                    <a class="btn btn-success"
                                                        href="{{URL::to('admin/users/'.$user->id.'/edit')}}">
-                                                        <i class="glyphicon glyphicon-edit icon-white"></i>
+                                                        <i class="glyphicon glyphicon-pencil"></i>
                                                         {{trans('view.EDIT')}}
                                                     </a>
 
@@ -85,11 +85,11 @@
                                                             'method' => 'DELETE',
                                                             'route' => ['users.destroy', $user->id],
                                                             'style' => 'display:inline',
-                                                            'onSubmit' => "return confirm('Are you sure to delete student?');"
+                                                            'onSubmit' => "return confirmDelete('Are you sure to delete student?');"
                                                             ])
                                                         !!}
                                                     <button type="submit" class="btn btn-danger" href="#">
-                                                        <i class="glyphicon glyphicon-trash icon-white"></i>
+                                                        <i class="glyphicon glyphicon-trash"></i>
                                                         {{trans('view.DELETE')}}
                                                     </button>
                                                     {!! Form::close() !!}
@@ -121,4 +121,17 @@
     <script src="{{URL::to('admin/coco/assets/libs/jquery-datatables/js/dataTables.bootstrap.js')}}"></script>
     <script src="{{URL::to('admin/coco/assets/libs/jquery-datatables/extensions/TableTools/js/dataTables.tableTools.min.js')}}"></script>
     <script src="{{URL::to('admin/coco/assets/js/pages/datatables.js')}}"></script>
+
+    {{--Custom scripts--}}
+    <script>
+        $(document).ready(function () {
+            function confirmDelete(evt) {
+                evt.preventDefault();
+
+                $('#confirmDeleteModal').modal('show');
+
+                return false;
+            }
+        });
+    </script>
 @endsection
