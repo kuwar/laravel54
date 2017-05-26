@@ -18,6 +18,9 @@
                 <h1>{{$subtitle}}</h1>
             </div>
             <!-- Page Heading End-->
+            {{--Alert--}}
+            @include('admin.includes.alerts')
+            
             <div class="row">
                 <div class="col-sm-6 portlets">
                     <div class="widget">
@@ -30,9 +33,10 @@
                             </div>
                         </div>
                         <div class="widget-content padding">
-                            <form role="form" id="userEditForm" method="post" action="{{ url('admin/users') }}">
-                                {{ csrf_field() }}
+                            <form role="form" id="userEditForm" method="post" action="{{ url('admin/users', $user->id) }}">
                                 {{ method_field('PATCH') }}
+                                {{ csrf_field() }}
+
                                 <input type="hidden" name="id" value="{{ $user->id }}">
 
                                 <div class="form-group {{ $errors->has('name') ? ' has-error ' : ''}}">

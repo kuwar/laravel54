@@ -123,7 +123,13 @@ class UsersController extends Controller
      */
     public function update(UserRequest $request, $id)
     {
-        $editUser = $this->user->edit($id);
+        $inputs = $request->all();
+        $data = [
+            'name' => $inputs['name'],
+            'email' => $inputs['email'],
+            'updated_at' => Carbon::now()
+        ];
+        $editUser = $this->user->update($data, $id, 'id');
 
         if ($editUser !== false) {
             Session::flash('success', Lang::get('message.UPDATE', ['name' => 'user']));
