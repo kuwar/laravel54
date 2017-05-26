@@ -20,7 +20,7 @@
             <!-- Page Heading End-->
             {{--Alert--}}
             @include('admin.includes.alerts')
-            
+
             <div class="row">
                 <div class="col-sm-6 portlets">
                     <div class="widget">
