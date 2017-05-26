@@ -30,7 +30,7 @@
                         <span class="pull-right"><i class="fa fa-angle-down"></i></span></a>
                     <ul>
                         <li><a href="{{url('admin/users')}}"
-                               class="{{ (Request::segment(2) == 'users' && Request::segment(3) == '') ? 'active' : '' }}"><span>List users</span></a>
+                               class="{{ (Request::segment(2) == 'users' && Request::segment(3) != 'create') ? 'active' : '' }}"><span>List users</span></a>
                         </li>
                         <li>
                             <a href={{url('admin/users/create')}} class="{{ (Request::segment(2) == 'users' && Request::segment(3) == 'create') ? 'active' : '' }}"><span>Create user</span></a>
