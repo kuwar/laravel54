@@ -36,7 +36,12 @@ class UserRequest extends FormRequest
                     'password' => 'required|confirmed|min:6'
                 ];
             }
-            case 'PUT':
+            case 'PUT': {
+                return [
+                    'old_password' => 'required',
+                    'password' => 'required|confirmed|min:6'
+                ];
+            }
             case 'PATCH': {
                 return [
                     'name' => 'required|max:255',

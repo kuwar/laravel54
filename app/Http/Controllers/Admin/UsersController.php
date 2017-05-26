@@ -156,4 +156,28 @@ class UsersController extends Controller
         }
         return redirect()->back();
     }
+
+    /**
+     * Change password
+     *
+     * @param UserRequest $request
+     * @return \Illuminate\Http\Response
+     */
+    public function putChangePassword(UserRequest $request)
+    {
+        $inputs = $request->all();
+        $data = [
+            'password' => Hash::make($inputs['password']),
+            'updated_at' => Carbon::now()
+        ];
+        $editUser = $this->user->update($data, $inputs['id'], 'id');
+
+        if ($editUser !== false) {
+            Session::flash('success', Lang::get('message.UPDATE', ['name' => 'password of user']));
+        } else {
+            Session::flash('warning', Lang::get('message.ERROR'));
+        }
+
+        return redirect()->back();
+    }
 }

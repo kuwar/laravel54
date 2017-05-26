@@ -22,6 +22,7 @@
             @include('admin.includes.alerts')
 
             <div class="row">
+                {{--Edit profile--}}
                 <div class="col-sm-6 portlets">
                     <div class="widget">
                         <div class="widget-header transparent">
@@ -52,6 +53,56 @@
                                     @if ($errors->has('email'))
                                         <small class="help-block">{{ $errors->first('email') }}</small>
                                     @endif
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">{{ trans('view.UPDATE') }}</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                {{--Change password--}}
+                <div class="col-sm-6 portlets">
+                    <div class="widget">
+                        <div class="widget-header transparent">
+                            <h2><strong>Change Password</strong> Form</h2>
+                            <div class="additional-btn">
+                                <a href="#" class="hidden reload"><i class="icon-ccw-1"></i></a>
+                                <a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
+                                <a href="#" class="widget-close"><i class="icon-cancel-3"></i></a>
+                            </div>
+                        </div>
+                        <div class="widget-content padding">
+                            <form role="form" id="userChangePasswordForm" method="post" action="{{ url('admin/users/change-password') }}">
+                                {{ method_field('PUT') }}
+                                {{ csrf_field() }}
+
+                                <input type="hidden" name="id" value="{{ $user->id }}">
+
+                                <div class="form-group {{ $errors->has('old_password') ? ' has-error ' : ''}}">
+                                    <label>Old password</label>
+                                    <input id="old_password" type="password" class="form-control" name="old_password">
+                                    @if ($errors->has('old_password'))
+                                        <small class="help-block">{{ $errors->first('old_password') }}</small>
+                                    @endif
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-6 {{ $errors->has('password') ? 'has-error' : '' }}">
+                                            <label>Password</label>
+                                            <input id="password" type="password" class="form-control" name="password">
+                                            @if ($errors->has('password'))
+                                                <small class="help-block">{{ $errors->first('password') }}</small>
+                                            @endif
+                                        </div>
+                                        <div class="col-sm-6 {{ $errors->has('password_confirmation') ? 'has-error' : '' }}">
+                                            <label>Re-Password</label>
+                                            <input type="password" class="form-control" name="password_confirmation">
+                                            @if ($errors->has('password_confirmation'))
+                                                <small class="help-block">{{ $errors->first('password_confirmation') }}</small>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">{{ trans('view.UPDATE') }}</button>

@@ -101,7 +101,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#changePasswordForm').bootstrapValidator({
+    $('#userChangePasswordForm').bootstrapValidator({
         message: 'This value is not valid',
         fields: {
             old_password: {
