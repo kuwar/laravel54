@@ -67,7 +67,7 @@
                                     </div>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary">Register</button>
+                                <button type="submit" class="btn btn-primary">{{ trans('view.REGISTER') }}</button>
                             </form>
                         </div>
                     </div>

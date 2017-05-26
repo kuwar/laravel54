@@ -30,48 +30,27 @@
                             </div>
                         </div>
                         <div class="widget-content padding">
-                            <form role="form" id="registerForm">
-                                <div class="form-group">
+                            <form role="form" id="userEditForm" method="post" action="{{ url('admin/users') }}">
+                                {{ csrf_field() }}
+                                {{ method_field('PATCH') }}
+                                <input type="hidden" name="id" value="{{ $user->id }}">
+
+                                <div class="form-group {{ $errors->has('name') ? ' has-error ' : ''}}">
                                     <label>Username</label>
-                                    <input type="text" class="form-control" name="username">
+                                    <input type="text" class="form-control" name="name" value="{{ old('name', $user->name) }}">
+                                    @if ($errors->has('name'))
+                                        <small class="help-block">{{ $errors->first('name') }}</small>
+                                    @endif
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group {{ $errors->has('email') ? ' has-error ' : ''}}">
                                     <label>Email address</label>
-                                    <input type="text" class="form-control" name="email">
+                                    <input type="text" class="form-control" name="email" value="{{ old('email', $user->email) }}">
+                                    @if ($errors->has('email'))
+                                        <small class="help-block">{{ $errors->first('email') }}</small>
+                                    @endif
                                 </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <label>Password</label>
-                                            <input id="password" type="password" class="form-control" name="password">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label>Re-Password</label>
-                                            <input type="password" class="form-control" name="confirmPassword">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Phone</label>
-                                    <input type="text" class="form-control" name="phoneNumber">
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label" id="captchaOperation"></label>
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="captcha"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input name="acceptTerms" type="checkbox"> I agree to the <a href="#">Terms
-                                                of Service</a>
-                                        </label>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Update</button>
+
+                                <button type="submit" class="btn btn-primary">{{ trans('view.UPDATE') }}</button>
                             </form>
                         </div>
                     </div>

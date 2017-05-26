@@ -107,7 +107,8 @@ class UsersController extends Controller
     {
         $this->viewData = [
             'title' => "Users",
-            'subtitle' => "Edit a user"
+            'subtitle' => "Edit a user",
+            'user' => $this->user->find($id)
         ];
 
         return view('admin.users.edit', $this->viewData);
