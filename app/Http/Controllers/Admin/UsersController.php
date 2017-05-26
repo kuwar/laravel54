@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
+use App\Mail\PasswordChanged;
+use App\Mail\UserRegistered;
 use App\Repositories\Eloquents\UserRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class UsersController extends Controller
@@ -173,6 +176,10 @@ class UsersController extends Controller
         $editUser = $this->user->update($data, $inputs['id'], 'id');
 
         if ($editUser !== false) {
+            Mail::to('kuwarsaurav21@gmail.com')
+                ->queue(new PasswordChanged());
+            Mail::to('kuwarsaurav21@gmail.com')
+                ->queue(new UserRegistered());
             Session::flash('success', Lang::get('message.UPDATE', ['name' => 'password of user']));
         } else {
             Session::flash('warning', Lang::get('message.ERROR'));
