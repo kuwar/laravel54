@@ -79,30 +79,19 @@
 
                                 <input type="hidden" name="id" value="{{ $user->id }}">
 
-                                <div class="form-group {{ $errors->has('old_password') ? ' has-error ' : ''}}">
-                                    <label>Old password</label>
-                                    <input id="old_password" type="password" class="form-control" name="old_password">
-                                    @if ($errors->has('old_password'))
-                                        <small class="help-block">{{ $errors->first('old_password') }}</small>
+                                <div class="form-group {{ $errors->has('password') ? ' has-error ' : ''}}">
+                                    <label>Password</label>
+                                    <input id="password" type="password" class="form-control" name="password">
+                                    @if ($errors->has('password'))
+                                        <small class="help-block">{{ $errors->first('password') }}</small>
                                     @endif
                                 </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-sm-6 {{ $errors->has('password') ? 'has-error' : '' }}">
-                                            <label>Password</label>
-                                            <input id="password" type="password" class="form-control" name="password">
-                                            @if ($errors->has('password'))
-                                                <small class="help-block">{{ $errors->first('password') }}</small>
-                                            @endif
-                                        </div>
-                                        <div class="col-sm-6 {{ $errors->has('password_confirmation') ? 'has-error' : '' }}">
-                                            <label>Re-Password</label>
-                                            <input type="password" class="form-control" name="password_confirmation">
-                                            @if ($errors->has('password_confirmation'))
-                                                <small class="help-block">{{ $errors->first('password_confirmation') }}</small>
-                                            @endif
-                                        </div>
-                                    </div>
+                                <div class="form-group {{ $errors->has('password_confirmation') ? ' has-error ' : ''}}">
+                                    <label>Re-Password</label>
+                                    <input id="password_confirmation" type="password" class="form-control" name="password_confirmation">
+                                    @if ($errors->has('password_confirmation'))
+                                        <small class="help-block">{{ $errors->first('password_confirmation') }}</small>
+                                    @endif
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">{{ trans('view.UPDATE') }}</button>

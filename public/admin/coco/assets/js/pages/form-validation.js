@@ -104,17 +104,6 @@ $(document).ready(function () {
     $('#userChangePasswordForm').bootstrapValidator({
         message: 'This value is not valid',
         fields: {
-            old_password: {
-                validators: {
-                    notEmpty: {
-                        message: 'The old password is required and can\'t be empty'
-                    },
-                    different: {
-                        field: 'password',
-                        message: 'The new password can\'t be the same as old password'
-                    }
-                }
-            },
             password: {
                 validators: {
                     notEmpty: {
@@ -123,10 +112,6 @@ $(document).ready(function () {
                     identical: {
                         field: 'password_confirmation',
                         message: 'The new password and its confirm are not the same'
-                    },
-                    different: {
-                        field: 'old_password',
-                        message: 'The new password can\'t be the same as old password'
                     }
                 }
             },
@@ -138,10 +123,6 @@ $(document).ready(function () {
                     identical: {
                         field: 'password',
                         message: 'The new password and its confirm are not the same'
-                    },
-                    different: {
-                        field: 'old_password',
-                        message: 'The new password can\'t be the same as old password'
                     }
                 }
             }

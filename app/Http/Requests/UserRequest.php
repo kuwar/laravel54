@@ -38,7 +38,6 @@ class UserRequest extends FormRequest
             }
             case 'PUT': {
                 return [
-                    'old_password' => 'required',
                     'password' => 'required|confirmed|min:6'
                 ];
             }
