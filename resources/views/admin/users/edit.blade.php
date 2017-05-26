@@ -15,7 +15,8 @@
         <div class="content">
             <!-- Page Heading Start -->
             <div class="page-heading">
-                <h1>{{$subtitle}}</h1>
+                <h1><i class='fa fa-users'></i> {{$title}}</h1>
+                <h3>{{$subtitle}}</h3></div>
             </div>
             <!-- Page Heading End-->
             {{--Alert--}}
