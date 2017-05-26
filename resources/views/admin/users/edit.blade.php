@@ -3,8 +3,9 @@
 @section('title', $title)
 
 @section('styles')
-    <link href="{{URL::to('admin/coco/assets/libs/bootstrap-validator/css/bootstrapValidator.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{URL::to('admin/coco/assets/css/style.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{URL::to('admin/coco/assets/libs/bootstrap-validator/css/bootstrapValidator.min.css')}}"
+          rel="stylesheet" type="text/css"/>
+    <link href="{{URL::to('admin/coco/assets/css/style.css')}}" rel="stylesheet" type="text/css"/>
 @endsection
 
 @section('contents')
@@ -17,11 +18,9 @@
             <div class="page-heading">
                 <h1><i class='fa fa-users'></i> {{$title}}</h1>
                 <h3>{{$subtitle}}</h3></div>
-            </div>
             <!-- Page Heading End-->
-            {{--Alert--}}
-            @include('admin.includes.alerts')
 
+            <!-- Your awesome content goes here -->
             <div class="row">
                 {{--Edit profile--}}
                 <div class="col-sm-6 portlets">
@@ -35,7 +34,8 @@
                             </div>
                         </div>
                         <div class="widget-content padding">
-                            <form role="form" id="userEditForm" method="post" action="{{ url('admin/users', $user->id) }}">
+                            <form role="form" id="userEditForm" method="post"
+                                  action="{{ url('admin/users', $user->id) }}">
                                 {{ method_field('PATCH') }}
                                 {{ csrf_field() }}
 
@@ -43,14 +43,16 @@
 
                                 <div class="form-group {{ $errors->has('name') ? ' has-error ' : ''}}">
                                     <label>Username</label>
-                                    <input type="text" class="form-control" name="name" value="{{ old('name', $user->name) }}">
+                                    <input type="text" class="form-control" name="name"
+                                           value="{{ old('name', $user->name) }}">
                                     @if ($errors->has('name'))
                                         <small class="help-block">{{ $errors->first('name') }}</small>
                                     @endif
                                 </div>
                                 <div class="form-group {{ $errors->has('email') ? ' has-error ' : ''}}">
                                     <label>Email address</label>
-                                    <input type="text" class="form-control" name="email" value="{{ old('email', $user->email) }}">
+                                    <input type="text" class="form-control" name="email"
+                                           value="{{ old('email', $user->email) }}">
                                     @if ($errors->has('email'))
                                         <small class="help-block">{{ $errors->first('email') }}</small>
                                     @endif
@@ -74,7 +76,8 @@
                             </div>
                         </div>
                         <div class="widget-content padding">
-                            <form role="form" id="userChangePasswordForm" method="post" action="{{ url('admin/users/change-password') }}">
+                            <form role="form" id="userChangePasswordForm" method="post"
+                                  action="{{ url('admin/users/change-password') }}">
                                 {{ method_field('PUT') }}
                                 {{ csrf_field() }}
 
@@ -89,7 +92,8 @@
                                 </div>
                                 <div class="form-group {{ $errors->has('password_confirmation') ? ' has-error ' : ''}}">
                                     <label>Re-Password</label>
-                                    <input id="password_confirmation" type="password" class="form-control" name="password_confirmation">
+                                    <input id="password_confirmation" type="password" class="form-control"
+                                           name="password_confirmation">
                                     @if ($errors->has('password_confirmation'))
                                         <small class="help-block">{{ $errors->first('password_confirmation') }}</small>
                                     @endif
