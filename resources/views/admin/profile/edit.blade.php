@@ -20,7 +20,10 @@
                 <h3>{{$subtitle}}</h3></div>
             <!-- Page Heading End-->
 
-            <!-- Your awesome content goes here -->
+        {{--Alert--}}
+        @include('admin.includes.alerts')
+
+        <!-- Your awesome content goes here -->
             <div class="row">
                 {{--Edit profile--}}
                 <div class="col-sm-6 portlets">
@@ -35,11 +38,9 @@
                         </div>
                         <div class="widget-content padding">
                             <form role="form" id="userEditForm" method="post"
-                                  action="{{ url('admin/users', $user->id) }}">
+                                  action="{{ url('admin/profile', $user->id) }}">
                                 {{ method_field('PATCH') }}
                                 {{ csrf_field() }}
-
-                                <input type="hidden" name="id" value="{{ $user->id }}">
 
                                 <div class="form-group {{ $errors->has('name') ? ' has-error ' : ''}}">
                                     <label>Username</label>
@@ -77,11 +78,9 @@
                         </div>
                         <div class="widget-content padding">
                             <form role="form" id="userChangePasswordForm" method="post"
-                                  action="{{ url('admin/users/change-password') }}">
+                                  action="{{ url('admin/profile/change-password') }}">
                                 {{ method_field('PUT') }}
                                 {{ csrf_field() }}
-
-                                <input type="hidden" name="id" value="{{ $user->id }}">
 
                                 <div class="form-group {{ $errors->has('password') ? ' has-error ' : ''}}">
                                     <label>Password</label>

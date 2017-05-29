@@ -25,8 +25,10 @@ Route::get('/home', function () {
 Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
     Route::get('dashboard', 'DashboardController@index');
 
+    Route::put('profile/change-password', 'ProfileController@putChangePassword');
+    Route::resource('profile', 'ProfileController');
+
     Route::put('users/change-password', 'UsersController@putChangePassword');
     Route::resource('users', 'UsersController');
-    Route::resource('profile', 'ProfileController');
 
 });

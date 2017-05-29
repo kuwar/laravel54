@@ -2,11 +2,31 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\AdminRequest;
+use App\Repositories\Eloquents\AdminProfileRepository;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller
 {
+    public $viewData = [];
+    public $admin;
+
+    public function __construct(AdminProfileRepository $admin)
+    {
+        $this->admin = $admin;
+
+        $this->viewData = [
+            'title' => "",
+            'subtitle' => ""
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +34,13 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+        $this->viewData = [
+            'title' => "Admin",
+            'subtitle' => "View profile",
+            'user' => $this->admin->find(Auth::id())
+        ];
+
+        return view('admin.profile.edit', $this->viewData);
     }
 
     /**
@@ -67,9 +93,22 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AdminRequest $request, $id)
     {
-        //
+        $inputs = $request->all();
+        $data = [
+            'name' => $inputs['name'],
+            'email' => $inputs['email'],
+            'updated_at' => Carbon::now()
+        ];
+        $editProfile = $this->admin->update($data, Auth::id(), 'id');
+
+        if ($editProfile !== false) {
+            Session::flash('success', Lang::get('message.UPDATE', ['name' => 'profile']));
+        } else {
+            Session::flash('warning', Lang::get('message.ERROR'));
+        }
+        return redirect()->back();
     }
 
     /**
@@ -81,5 +120,29 @@ class ProfileController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Change password
+     *
+     * @param UserRequest $request
+     * @return \Illuminate\Http\Response
+     */
+    public function putChangePassword(AdminRequest $request)
+    {
+        $inputs = $request->all();
+        $data = [
+            'password' => Hash::make($inputs['password']),
+            'updated_at' => Carbon::now()
+        ];
+        $editProfile = $this->admin->update($data, Auth::id(), 'id');
+
+        if ($editProfile !== false) {
+            Session::flash('success', Lang::get('message.UPDATE', ['name' => 'password']));
+        } else {
+            Session::flash('warning', Lang::get('message.ERROR'));
+        }
+
+        return redirect()->back();
     }
 }
