@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Mail;
 
-use App\User;
+use App\Models\User;
 
 class UserRepository extends AbstractRepository
 {
@@ -33,7 +33,7 @@ class UserRepository extends AbstractRepository
      */
     function model()
     {
-        return 'App\User';
+        return 'App\Models\User';
     }
 
     public function add()
