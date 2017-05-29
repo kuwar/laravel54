@@ -20,9 +20,9 @@
                                         src="{{URL::to('admin/coco/images/users/user-35.jpg')}}"></span>
                             {{ Auth::user()->name }} <i class="fa fa-caret-down"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">My Profile</a></li>
-                            <li><a href="#">Change Password</a></li>
-                            <li><a href="#">Account Setting</a></li>
+                            <li><a href="{{ url('admin/profile') }}">My Profile</a></li>
+                            <li><a href="{{ url('admin/profile') }}">Change Password</a></li>
+                            <li><a href="{{ url('admin/settings') }}">Setting</a></li>
                             <li class="divider"></li>
                             <li>
                                 <a class="md-trigger" data-modal="logout-modal"><i class="icon-logout-1"></i> Logout</a>
