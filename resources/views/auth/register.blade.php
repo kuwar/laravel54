@@ -12,7 +12,8 @@
 
                         <div class="form-group login-input">
                             <i class="fa fa-envelope overlay"></i>
-                            <input id="email" type="email" class="form-control text-input" placeholder="E-mail" name="email" value="{{ old('email') }}" required autofocus>
+                            <input id="email" type="email" class="form-control text-input" placeholder="E-mail"
+                                   name="email" value="{{ old('email') }}" required autofocus>
                             @if ($errors->has('email'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -22,7 +23,8 @@
 
                         <div class="form-group login-input">
                             <i class="fa fa-user overlay"></i>
-                            <input id="name" type="text" class="form-control text-input" placeholder="Username" name="name" value="{{ old('name') }}" required>
+                            <input id="name" type="text" class="form-control text-input" placeholder="Username"
+                                   name="name" value="{{ old('name') }}" required>
                             @if ($errors->has('name'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -32,7 +34,8 @@
 
                         <div class="form-group login-input">
                             <i class="fa fa-key overlay"></i>
-                            <input id="password" type="password" class="form-control text-input" placeholder="********" name="password" required>
+                            <input id="password" type="password" class="form-control text-input" placeholder="********"
+                                   name="password" required>
                             @if ($errors->has('password'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -42,7 +45,8 @@
 
                         <div class="form-group login-input">
                             <i class="fa fa-key overlay"></i>
-                            <input id="password_confirmation" type="password" class="form-control text-input" placeholder="********" name="password_confirmation" required>
+                            <input id="password_confirmation" type="password" class="form-control text-input"
+                                   placeholder="********" name="password_confirmation" required>
                             @if ($errors->has('password_confirmation'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('password_confirmation') }}</strong>
