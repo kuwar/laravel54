@@ -28,6 +28,8 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
     Route::put('profile/change-password', 'ProfileController@putChangePassword');
     Route::resource('profile', 'ProfileController');
 
+    Route::resource('settings', 'SettingController');
+
     Route::put('users/change-password', 'UsersController@putChangePassword');
     Route::resource('users', 'UsersController');
 

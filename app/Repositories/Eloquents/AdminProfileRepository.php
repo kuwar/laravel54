@@ -17,7 +17,7 @@ class AdminProfileRepository extends AbstractRepository
     public function __construct(Request $request, Admin $admin, GeneralLibrary $generalLibrary)
     {
         parent::__construct(new App);
-        $this->$admin = $admin;
+        $this->admin = $admin;
         $this->request = $request;
         $this->generalLibrary = $generalLibrary;
     }
