@@ -26,6 +26,8 @@ class CreateSiteSettingsTable extends Migration
             $table->string('default_page_title');
             $table->string('default_meta_keys');
             $table->string('default_meta_description');
+            $table->string('author_name');
+            $table->string('author_email');
             $table->timestamps();
         });
     }

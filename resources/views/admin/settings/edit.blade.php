@@ -59,6 +59,88 @@
                                     @endif
                                 </div>
 
+                                <div class="form-group {{ $errors->has('contact_phone') ? ' has-error ' : ''}}">
+                                    <label>Contact phone</label>
+                                    <input type="text" class="form-control" name="contact_phone"
+                                           value="{{ old('contact_phone', $setting->contact_phone) }}">
+                                    @if ($errors->has('contact_email'))
+                                        <small class="help-block">{{ $errors->first('contact_phone') }}</small>
+                                    @endif
+                                </div>
+
+                                <div class="form-group {{ $errors->has('contact_address') ? ' has-error ' : ''}}">
+                                    <label>Contact address</label>
+                                    <input type="text" class="form-control" name="contact_address"
+                                           value="{{ old('contact_address', $setting->contact_address) }}">
+                                    @if ($errors->has('contact_address'))
+                                        <small class="help-block">{{ $errors->first('contact_address') }}</small>
+                                    @endif
+                                </div>
+
+                                <div class="form-group {{ $errors->has('facebook_page_url') ? ' has-error ' : ''}}">
+                                    <label>Facebook page url</label>
+                                    <input type="text" class="form-control" name="facebook_page_url"
+                                           value="{{ old('facebook_page_url', $setting->facebook_page_url) }}">
+                                    @if ($errors->has('facebook_page_url'))
+                                        <small class="help-block">{{ $errors->first('facebook_page_url') }}</small>
+                                    @endif
+                                </div>
+
+                                <div class="form-group {{ $errors->has('twitter_page_url') ? ' has-error ' : ''}}">
+                                    <label>Twitter page url</label>
+                                    <input type="text" class="form-control" name="twitter_page_url"
+                                           value="{{ old('twitter_page_url', $setting->twitter_page_url) }}">
+                                    @if ($errors->has('twitter_page_url'))
+                                        <small class="help-block">{{ $errors->first('twitter_page_url') }}</small>
+                                    @endif
+                                </div>
+
+                                <div class="form-group {{ $errors->has('youtube_page_url') ? ' has-error ' : ''}}">
+                                    <label>Youtube page url</label>
+                                    <input type="text" class="form-control" name="youtube_page_url"
+                                           value="{{ old('youtube_page_url', $setting->youtube_page_url) }}">
+                                    @if ($errors->has('youtube_page_url'))
+                                        <small class="help-block">{{ $errors->first('youtube_page_url') }}</small>
+                                    @endif
+                                </div>
+
+                                <div class="form-group {{ $errors->has('googleplus_page_url') ? ' has-error ' : ''}}">
+                                    <label>Google plus page url</label>
+                                    <input type="text" class="form-control" name="googleplus_page_url"
+                                           value="{{ old('googleplus_page_url', $setting->googleplus_page_url) }}">
+                                    @if ($errors->has('googleplus_page_url'))
+                                        <small class="help-block">{{ $errors->first('googleplus_page_url') }}</small>
+                                    @endif
+                                </div>
+
+                                <div class="form-group {{ $errors->has('default_page_title') ? ' has-error ' : ''}}">
+                                    <label>Default page title</label>
+                                    <input type="text" class="form-control" name="default_page_title"
+                                           value="{{ old('default_page_title', $setting->default_page_title) }}">
+                                    @if ($errors->has('default_page_title'))
+                                        <small class="help-block">{{ $errors->first('default_page_title') }}</small>
+                                    @endif
+                                </div>
+
+                                <div class="form-group {{ $errors->has('default_meta_keys') ? ' has-error ' : ''}}">
+                                    <label>Default meta keys</label>
+                                    <input type="text" class="form-control" name="default_meta_keys"
+                                           value="{{ old('default_meta_keys', $setting->default_meta_keys) }}">
+                                    @if ($errors->has('default_meta_keys'))
+                                        <small class="help-block">{{ $errors->first('default_meta_keys') }}</small>
+                                    @endif
+                                </div>
+
+                                <div class="form-group {{ $errors->has('default_meta_description') ? ' has-error ' : ''}}">
+                                    <label>Default meta description</label>
+                                    <input type="text" class="form-control" name="default_meta_description"
+                                           value="{{ old('default_meta_description', $setting->default_meta_description) }}">
+                                    @if ($errors->has('default_meta_description'))
+                                        <small class="help-block">{{ $errors->first('default_meta_description') }}</small>
+                                    @endif
+                                </div>
+
+
                                 <button type="submit" class="btn btn-primary">{{ trans('view.UPDATE') }}</button>
                             </form>
                         </div>

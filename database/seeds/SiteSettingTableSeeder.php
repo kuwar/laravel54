@@ -23,6 +23,8 @@ class SiteSettingTableSeeder extends Seeder
             'default_page_title' => '1234567890',
             'default_meta_keys' => '1234567890',
             'default_meta_description' => '1234567890',
+            'author_name' => 'Saurav Kuwar',
+            'author_email' => 'kuwarsaurav21@gmail.com',
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now()
         ]);
