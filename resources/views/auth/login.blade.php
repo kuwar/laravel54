@@ -40,7 +40,8 @@
                                 <button type="submit" class="btn btn-success btn-block">LOGIN</button>
                             </div>
                             <div class="col-sm-6">
-                                <a href="{{ route('register') }}" class="btn btn-default btn-block">Register</a>
+                                {{--<a href="{{ route('register') }}" class="btn btn-default btn-block">Register</a>--}}
+                                <a href="{{ url('password/reset') }}" class="">Forget password?</a>
                             </div>
                         </div>
                     </form>
