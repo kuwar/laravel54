@@ -1,5 +1,5 @@
 <?php
-namespace App\Repository;
+namespace App\Libraries;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Models\PushNotification;
 use Illuminate\Support\Facades\DB;
 
-class PushNotificationRepository
+class PushNotificationLibrary
 {
 
     protected $request;
@@ -24,7 +24,7 @@ class PushNotificationRepository
         $this->request = $request;
 
         $this->serverKey = "AAAAxLubxI4:APA91bFxITNg3Fl7SDdARk3rK42xEhCtp8DtW1DE7_jNxTri-E88elD4RkB0_V80KKX_FhooNR9rK9auPs_OCsLnEMNcmpSx1hVDM-_Jf4zfHjH_00AbT9GVL0Oq08aXpXOC-ayn_t3b";
-        $this->url = "https://fcm.googleapis.com/fcm/send";
+        $this->url = "https://android.googleapis.com/gcm/send";
     }
 
     public function getPushNotifications()
@@ -60,6 +60,11 @@ class PushNotificationRepository
 
     /**
      * Fcm push notification
+     * @param array $regIds
+     * @param string $title
+     * @param string $body
+     *
+     * @return mixed
      */
     public function sendPushNotification($regIds, $title, $body)
     {
@@ -85,7 +90,7 @@ class PushNotificationRepository
             );
 
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'https://android.googleapis.com/gcm/send');
+            curl_setopt($ch, CURLOPT_URL, $this->url);
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
